@@ -2,18 +2,28 @@
 <html lang="en" class="container mt-4">
   <head>
     <meta charset="UTF-8" />
-    <title>Lifecycle Hooks</title>
+    <title>Events and Methods</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
   </head>
   <body>
-    <div class="container" id="app">
-      <div class="form-inline mr-auto">
+    <div id="app">
+      <nav class="navbar navbar-light bg-light fixed-top" v-if="cart.length > 0">
+        <div class="navbar-text ml-auto">
+          <b>cart:</b>
+          <span class="badge badge-pill badge-success">{{ cart.length }}</span>
+        </div>
+      </nav>
+
+      <div class="form-inline mr-auto mt-5">
         <label class="font-weight-bold mr-2" for="formMax">max</label>
         <input type="text" id="formMax" class="form-control w-25" v-model="maximum" />
       </div>
       <input type="range" class="custom-range" min="0" max="200" v-model="maximum" />
       <div class="row d-flex mb-3 align-items-center" v-for="item in products" v-if="item.price<=Number(maximum)">
-        <div class="col-sm-4">
+        <div class="col-1 m-auto">
+          <button class="btn btn-info" v-on:click="addItem(item)">+</button>
+        </div>
+        <div class="col-4">
           <img class="img-fluid d-block" :src="item.image" :alt="item.name" />
         </div>
         <div class="col">
@@ -31,18 +41,25 @@
 
     <script>
       var app = new Vue({
-       el: '#app',
-       data: {
-        maximum: 99,
-        products: null
-       },
-      mounted: function() {
-        fetch('https://hplussport.com/api/products/order/price')
-          .then(response => response.json())
-          .then(data => {
-            this.products = data
-          })
-      }
+        el: '#app',
+        data: {
+          maximum: 99,
+          products: null,
+          cart: [],
+        },
+        methods: {
+          addItem: function (product) {
+            this.cart.push(product)
+          },
+        },
+        mounted: function () {
+          fetch('https://hplussport.com/api/products/order/price')
+            .then((response) => response.json())
+            .then((data) => {
+              this.products = data
+            })
+        },
+      })
     </script>
   </body>
 </html>
