@@ -8,13 +8,15 @@
   <body>
     <div class="container" id="app">
       <div class="row d-flex mb-3 align-items-center" v-for="item in products">
-        <div class="col-sm-4">
-          <img class="img-fluid d-block" :src="item.image" :alt="item.name" />
-        </div>
-        <div class="col">
-          <h3 class="text-info">{{ item.name }}</h3>
-          <p class="mb-0">{{ item.description }}</p>
-          <div class="h5 float-right">${{ Number(item.price) }}</div>
+        <div v-if="item.price <= Number(maximum)">
+          <div class="col-sm-4">
+            <img class="img-fluid d-block" :src="item.image" :alt="item.name" />
+          </div>
+          <div class="col">
+            <h3 class="text-info">{{ item.name }}</h3>
+            <p class="mb-0">{{ item.description }}</p>
+            <div class="h5 float-right">${{ Number(item.price) }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -26,6 +28,7 @@
 
     <script>
       var data = {
+        maximum: 99,
         products: [
           {
             id: '532',
