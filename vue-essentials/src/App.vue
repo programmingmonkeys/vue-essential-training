@@ -1,11 +1,18 @@
 <template>
   <div id="app" class="container mt-5">
+    <checkout
+      :cart="cart"
+      :cartQty="cartQty"
+      :cartTotal="cartTotal"
+      @delete="deleteItem"
+      @add="addItem"
+    ></checkout>
     <products
       :cart="cart"
       :cartQty="cartQty"
       :cartTotal="cartTotal"
       :sliderStatus="sliderStatus"
-      :maximun.sync="maximum"
+      :maximum.sync="maximum"
       :products="products"
       @toggle="toggleSliderStatus"
       @delete="deleteItem"
@@ -15,12 +22,14 @@
 </template>
 
 <script>
-import Products from "./components/Products";
+import Products from "./components/Products.vue";
+import Checkout from "./components/Checkout.vue";
 
 export default {
   name: "app",
   components: {
-    Products
+    Products,
+    Checkout
   },
   data: function() {
     return {
@@ -50,7 +59,6 @@ export default {
     toggleSliderStatus: function() {
       this.sliderStatus = !this.sliderStatus;
     },
-
     deleteItem: function(id) {
       if (this.cart[id].qty > 1) {
         this.cart[id].qty--;
@@ -58,7 +66,6 @@ export default {
         this.cart.splice(id, 1);
       }
     },
-
     addItem: function(product) {
       var whichProduct;
       var existing = this.cart.filter(function(item, index) {

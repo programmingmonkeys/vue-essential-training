@@ -10,7 +10,7 @@
     ></navbar>
     <price-slider
       :sliderStatus="sliderStatus"
-      :maximun.sync="maximum"
+      :maximum.sync="maximum"
     ></price-slider>
     <product-list
       :maximum="maximum"
@@ -19,11 +19,10 @@
     ></product-list>
   </div>
 </template>
-
 <script>
-import Navbar from "./Navbzar";
-import PriceSlider from "./PriceSlider";
-import ProductList from "./ProductList";
+import Navbar from "./Navbar.vue";
+import PriceSlider from "./PriceSlider.vue";
+import ProductList from "./ProductList.vue";
 
 export default {
   name: "products",

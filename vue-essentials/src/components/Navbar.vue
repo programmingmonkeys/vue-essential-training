@@ -5,6 +5,7 @@
         class="btn btn-sm btn-outline-success"
         @click="$parent.$emit('toggle')"
       >
+        <i class="fas fa-dollar-sign"></i>
         <font-awesome-icon icon="dollar-sign"></font-awesome-icon>
       </button>
       <div class="dropdown ml-2" v-if="cart.length > 0">
@@ -30,12 +31,12 @@
                 >{{ item.qty }}</span
               >
               {{ item.product.name }}
-              <b
-                ><price :value="Number(item.qty * item.product.price)"></price
-              ></b>
+              <b>
+                <price :value="Number(item.qty * item.product.price)"></price>
+              </b>
               <a
                 href="#"
-                @click.stop="$emit('delete', index)"
+                @click.stop="$parent.$emit('delete', index)"
                 class="badge badge-danger text-white"
                 >-</a
               >
@@ -48,7 +49,7 @@
 </template>
 
 <script>
-import Price from "./Price";
+import Price from "./Price.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
