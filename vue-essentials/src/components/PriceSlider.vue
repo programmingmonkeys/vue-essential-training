@@ -9,7 +9,7 @@
           class="form-control mx-2 text-center"
           :style="'width: 60px;'"
           v-model="maxAmount"
-          @change="$emit('update:maximun', maxAmount)"
+          @change="$parent.$emit('update:maximun', maxAmount)"
         />
         <input
           type="range"
@@ -17,7 +17,7 @@
           min="0"
           max="200"
           v-model="maxAmount"
-          @input="$emit('update:maximun', maxAmount)"
+          @input="$parent.$emit('update:maximun', maxAmount)"
         />
       </div>
     </div>

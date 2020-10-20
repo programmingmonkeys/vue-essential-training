@@ -1,38 +1,26 @@
 <template>
   <div id="app" class="container mt-5">
-    <h1>My Shop</h1>
-    <navbar
+    <products
       :cart="cart"
       :cartQty="cartQty"
       :cartTotal="cartTotal"
-      @toggle="toggleSliderStatus"
-      @delete="deleteItem"
-    ></navbar>
-    <price-slider
       :sliderStatus="sliderStatus"
       :maximun.sync="maximum"
-    ></price-slider>
-    <product-list
-      :maximum="maximum"
       :products="products"
+      @toggle="toggleSliderStatus"
+      @delete="deleteItem"
       @add="addItem"
-    ></product-list>
+    ></products>
   </div>
 </template>
 
 <script>
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import ProductList from "./components/ProductList";
-import PriceSlider from "./components/PriceSlider";
-import Navbar from "./components/Navbar";
+import Products from "./components/Products";
 
 export default {
   name: "app",
   components: {
-    FontAwesomeIcon,
-    ProductList,
-    PriceSlider,
-    Navbar
+    Products
   },
   data: function() {
     return {
